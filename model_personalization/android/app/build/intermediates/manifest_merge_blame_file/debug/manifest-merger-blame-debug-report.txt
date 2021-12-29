@@ -6,60 +6,60 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
+8-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
 9        android:targetSdkVersion="30" />
-9-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
+9-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.CAMERA" />
-11-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:6:3-63
-11-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:6:20-60
+11-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:6:3-63
+11-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:6:20-60
 12
 13    <uses-feature android:name="android.hardware.camera" />
-13-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:8:3-58
-13-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:8:17-55
+13-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:8:3-58
+13-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:8:17-55
 14    <uses-feature android:name="android.hardware.camera.autofocus" />
-14-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:9:3-68
-14-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:9:17-65
+14-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:9:3-68
+14-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:9:17-65
 15
 16    <application
-16-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:11:3-29:17
+16-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:11:3-29:17
 17        android:allowBackup="true"
-17-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:13:7-33
+17-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:13:7-33
 18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 18-->[androidx.core:core:1.5.0] /home/kch/.gradle/caches/transforms-3/e759884e8e1539e68246ec4d8729cc98/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
 19        android:configChanges="orientation"
-19-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:14:7-42
+19-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:14:7-42
 20        android:debuggable="true"
 21        android:icon="@mipmap/ic_launcher"
-21-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:15:7-41
+21-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:15:7-41
 22        android:label="@string/app_name"
-22-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:16:7-39
+22-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:16:7-39
 23        android:roundIcon="@mipmap/ic_launcher_round"
-23-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:17:7-52
+23-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:17:7-52
 24        android:supportsRtl="true"
-24-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:18:7-33
+24-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:18:7-33
 25        android:taskAffinity=""
-25-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:12:7-30
+25-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:12:7-30
 26        android:testOnly="true"
 27        android:theme="@style/Theme.TransferLearningDemoApp" >
-27-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:19:7-59
+27-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:19:7-59
 28        <activity
-28-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:20:5-28:16
+28-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:20:5-28:16
 29            android:name="org.tensorflow.lite.examples.transfer.MainActivity"
-29-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:21:9-37
+29-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:21:9-37
 30            android:exported="true"
-30-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:22:9-32
+30-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:22:9-32
 31            android:screenOrientation="portrait" >
-31-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:23:9-45
+31-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:23:9-45
 32            <intent-filter>
-32-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:24:7-27:23
+32-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:24:7-27:23
 33                <action android:name="android.intent.action.MAIN" />
-33-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:25:9-61
-33-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:25:17-58
+33-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:25:9-61
+33-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:25:17-58
 34
 35                <category android:name="android.intent.category.LAUNCHER" />
-35-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:26:9-69
-35-->/home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:26:19-66
+35-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:26:9-69
+35-->/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:26:19-66
 36            </intent-filter>
 37        </activity>
 38

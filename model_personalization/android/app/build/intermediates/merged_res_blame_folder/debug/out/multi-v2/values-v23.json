@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/kch/Study/model_personalization/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
+            "outputFile": "/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "/home/kch/.gradle/caches/transforms-3/f950e68cf2d530665e7ddc5a0bb6330c/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",

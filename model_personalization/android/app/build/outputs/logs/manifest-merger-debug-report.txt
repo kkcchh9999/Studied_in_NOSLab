@@ -1,17 +1,17 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
+ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
 MERGED from [androidx.databinding:databinding-adapters:7.0.0] /home/kch/.gradle/caches/transforms-3/3763cc92c34e63ec4f542ac39d75b82f/transformed/databinding-adapters-7.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.databinding:databinding-runtime:7.0.0] /home/kch/.gradle/caches/transforms-3/acc91342003c60a514f9c89879448632/transformed/databinding-runtime-7.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.4.0] /home/kch/.gradle/caches/transforms-3/e44905d88435b8a284dfc0fee1bf9165/transformed/material-1.4.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/kch/.gradle/caches/transforms-3/c68edcdd10b64f27a58365e0b432dd77/transformed/constraintlayout-2.1.0/AndroidManifest.xml:2:1-11:12
-MERGED from [:transfer_api] /home/kch/Study/model_personalization/android/transfer_api/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:transfer_api] /home/kch/Study/Studied_in_NOSLab/model_personalization/android/transfer_api/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat:1.3.1] /home/kch/.gradle/caches/transforms-3/28e3699e3cda6166bcd0cc403f8c832c/transformed/appcompat-1.3.1/AndroidManifest.xml:17:1-24:12
-MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/74975d66cbb1c5febd56d0a87b01f344/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:2:1-12:12
-MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/9226a04e1a358e52c9c9fd089814d0f8/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:2:1-12:12
+MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/7546aba27c697138c708a2d107fc29df/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:2:1-12:12
+MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/49ed8a340fa3073e0b284babca7204c0/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:2:1-12:12
 MERGED from [androidx.camera:camera-camera2:1.0.0-alpha04] /home/kch/.gradle/caches/transforms-3/68a58a9ba93bc86cc6cdb00555d731d8/transformed/jetified-camera-camera2-1.0.0-alpha04/AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.camera:camera-core:1.0.0-alpha04] /home/kch/.gradle/caches/transforms-3/ce3ed79ada1a7557ece3bd08035555f7/transformed/jetified-camera-core-1.0.0-alpha04/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-extensions:2.1.0] /home/kch/.gradle/caches/transforms-3/4a9f8f8646701ac7ef0b378acd386929/transformed/lifecycle-extensions-2.1.0/AndroidManifest.xml:17:1-25:12
@@ -51,46 +51,46 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] /home/kch/.gradle/caches/
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/kch/.gradle/caches/transforms-3/4a686211be3134d52c983281414d9a4c/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /home/kch/.gradle/caches/transforms-3/137fae5cb8b43fd4d77cda20fb259169/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] /home/kch/.gradle/caches/transforms-3/301b99617320b59a57400f8a9ec84a15/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/231f362f22a8f640206141b4ed8acfd9/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:2:1-12:12
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
+MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/ef6d80e1864b165d9c3ca303c39cd9ed/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:2:1-12:12
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
 	package
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:3:5-52
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:3:5-52
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:1-31:12
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.CAMERA
-ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:6:3-63
+ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:6:3-63
 	android:name
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:6:20-60
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:6:20-60
 uses-feature#android.hardware.camera
-ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:8:3-58
+ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:8:3-58
 	android:name
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:8:17-55
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:8:17-55
 uses-feature#android.hardware.camera.autofocus
-ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:9:3-68
+ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:9:3-68
 	android:name
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:9:17-65
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:9:17-65
 application
-ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:11:3-29:17
+ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:11:3-29:17
 MERGED from [com.google.android.material:material:1.4.0] /home/kch/.gradle/caches/transforms-3/e44905d88435b8a284dfc0fee1bf9165/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.4.0] /home/kch/.gradle/caches/transforms-3/e44905d88435b8a284dfc0fee1bf9165/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/kch/.gradle/caches/transforms-3/c68edcdd10b64f27a58365e0b432dd77/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/kch/.gradle/caches/transforms-3/c68edcdd10b64f27a58365e0b432dd77/transformed/constraintlayout-2.1.0/AndroidManifest.xml:9:5-20
-MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/74975d66cbb1c5febd56d0a87b01f344/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
-MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/74975d66cbb1c5febd56d0a87b01f344/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
-MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/9226a04e1a358e52c9c9fd089814d0f8/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
-MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/9226a04e1a358e52c9c9fd089814d0f8/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
+MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/7546aba27c697138c708a2d107fc29df/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
+MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/7546aba27c697138c708a2d107fc29df/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
+MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/49ed8a340fa3073e0b284babca7204c0/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
+MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/49ed8a340fa3073e0b284babca7204c0/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
 MERGED from [androidx.camera:camera-camera2:1.0.0-alpha04] /home/kch/.gradle/caches/transforms-3/68a58a9ba93bc86cc6cdb00555d731d8/transformed/jetified-camera-camera2-1.0.0-alpha04/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.camera:camera-camera2:1.0.0-alpha04] /home/kch/.gradle/caches/transforms-3/68a58a9ba93bc86cc6cdb00555d731d8/transformed/jetified-camera-camera2-1.0.0-alpha04/AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.lifecycle:lifecycle-extensions:2.1.0] /home/kch/.gradle/caches/transforms-3/4a9f8f8646701ac7ef0b378acd386929/transformed/lifecycle-extensions-2.1.0/AndroidManifest.xml:22:5-23:19
@@ -101,48 +101,48 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/kch/.
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/kch/.gradle/caches/transforms-3/5861500acfc863b7035da42a520ef0d9/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.1.0] /home/kch/.gradle/caches/transforms-3/5a9dbe371fb5b6de27c2a22db9163964/transformed/jetified-lifecycle-process-2.1.0/AndroidManifest.xml:22:5-28:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.1.0] /home/kch/.gradle/caches/transforms-3/5a9dbe371fb5b6de27c2a22db9163964/transformed/jetified-lifecycle-process-2.1.0/AndroidManifest.xml:22:5-28:19
-MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/231f362f22a8f640206141b4ed8acfd9/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
-MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/231f362f22a8f640206141b4ed8acfd9/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
+MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/ef6d80e1864b165d9c3ca303c39cd9ed/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
+MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/ef6d80e1864b165d9c3ca303c39cd9ed/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:10:5-20
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.5.0] /home/kch/.gradle/caches/transforms-3/e759884e8e1539e68246ec4d8729cc98/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:18:7-33
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:18:7-33
 	android:label
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:16:7-39
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:16:7-39
 	android:roundIcon
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:17:7-52
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:17:7-52
 	android:configChanges
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:14:7-42
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:14:7-42
 	android:icon
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:15:7-41
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:15:7-41
 	android:allowBackup
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:13:7-33
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:13:7-33
 	android:theme
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:19:7-59
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:19:7-59
 	android:taskAffinity
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:12:7-30
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:12:7-30
 activity#org.tensorflow.lite.examples.transfer.MainActivity
-ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:20:5-28:16
+ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:20:5-28:16
 	android:screenOrientation
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:23:9-45
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:23:9-45
 	android:exported
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:22:9-32
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:22:9-32
 	android:name
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:21:9-37
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:21:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:24:7-27:23
+ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:24:7-27:23
 action#android.intent.action.MAIN
-ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:25:9-61
+ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:25:9-61
 	android:name
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:25:17-58
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:25:17-58
 category#android.intent.category.LAUNCHER
-ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:26:9-69
+ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:26:9-69
 	android:name
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml:26:19-66
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml:26:19-66
 uses-sdk
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
 MERGED from [androidx.databinding:databinding-adapters:7.0.0] /home/kch/.gradle/caches/transforms-3/3763cc92c34e63ec4f542ac39d75b82f/transformed/databinding-adapters-7.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.databinding:databinding-adapters:7.0.0] /home/kch/.gradle/caches/transforms-3/3763cc92c34e63ec4f542ac39d75b82f/transformed/databinding-adapters-7.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.databinding:databinding-runtime:7.0.0] /home/kch/.gradle/caches/transforms-3/acc91342003c60a514f9c89879448632/transformed/databinding-runtime-7.0.0/AndroidManifest.xml:20:5-44
@@ -151,14 +151,14 @@ MERGED from [com.google.android.material:material:1.4.0] /home/kch/.gradle/cache
 MERGED from [com.google.android.material:material:1.4.0] /home/kch/.gradle/caches/transforms-3/e44905d88435b8a284dfc0fee1bf9165/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/kch/.gradle/caches/transforms-3/c68edcdd10b64f27a58365e0b432dd77/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.0] /home/kch/.gradle/caches/transforms-3/c68edcdd10b64f27a58365e0b432dd77/transformed/constraintlayout-2.1.0/AndroidManifest.xml:5:5-7:41
-MERGED from [:transfer_api] /home/kch/Study/model_personalization/android/transfer_api/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:transfer_api] /home/kch/Study/model_personalization/android/transfer_api/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:transfer_api] /home/kch/Study/Studied_in_NOSLab/model_personalization/android/transfer_api/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:transfer_api] /home/kch/Study/Studied_in_NOSLab/model_personalization/android/transfer_api/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.appcompat:appcompat:1.3.1] /home/kch/.gradle/caches/transforms-3/28e3699e3cda6166bcd0cc403f8c832c/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.3.1] /home/kch/.gradle/caches/transforms-3/28e3699e3cda6166bcd0cc403f8c832c/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
-MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/74975d66cbb1c5febd56d0a87b01f344/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:7:5-8:41
-MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/74975d66cbb1c5febd56d0a87b01f344/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:7:5-8:41
-MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/9226a04e1a358e52c9c9fd089814d0f8/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:8:5-47
-MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/9226a04e1a358e52c9c9fd089814d0f8/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:8:5-47
+MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/7546aba27c697138c708a2d107fc29df/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:7:5-8:41
+MERGED from [org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/7546aba27c697138c708a2d107fc29df/transformed/jetified-tensorflow-lite-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:7:5-8:41
+MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/49ed8a340fa3073e0b284babca7204c0/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:8:5-47
+MERGED from [org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/49ed8a340fa3073e0b284babca7204c0/transformed/jetified-tensorflow-lite-select-tf-ops-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:8:5-47
 MERGED from [androidx.camera:camera-camera2:1.0.0-alpha04] /home/kch/.gradle/caches/transforms-3/68a58a9ba93bc86cc6cdb00555d731d8/transformed/jetified-camera-camera2-1.0.0-alpha04/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.camera:camera-camera2:1.0.0-alpha04] /home/kch/.gradle/caches/transforms-3/68a58a9ba93bc86cc6cdb00555d731d8/transformed/jetified-camera-camera2-1.0.0-alpha04/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.camera:camera-core:1.0.0-alpha04] /home/kch/.gradle/caches/transforms-3/ce3ed79ada1a7557ece3bd08035555f7/transformed/jetified-camera-core-1.0.0-alpha04/AndroidManifest.xml:20:5-22:41
@@ -237,21 +237,21 @@ MERGED from [androidx.print:print:1.0.0] /home/kch/.gradle/caches/transforms-3/1
 MERGED from [androidx.print:print:1.0.0] /home/kch/.gradle/caches/transforms-3/137fae5cb8b43fd4d77cda20fb259169/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] /home/kch/.gradle/caches/transforms-3/301b99617320b59a57400f8a9ec84a15/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] /home/kch/.gradle/caches/transforms-3/301b99617320b59a57400f8a9ec84a15/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/231f362f22a8f640206141b4ed8acfd9/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:7:5-8:41
-MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/231f362f22a8f640206141b4ed8acfd9/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:7:5-8:41
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
+MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/ef6d80e1864b165d9c3ca303c39cd9ed/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:7:5-8:41
+MERGED from [org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT] /home/kch/.gradle/caches/transforms-3/ef6d80e1864b165d9c3ca303c39cd9ed/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml:7:5-8:41
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		MERGED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		MERGED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		MERGED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
-		INJECTED from /home/kch/Study/model_personalization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		MERGED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		MERGED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		MERGED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/src/main/AndroidManifest.xml
 provider#androidx.camera.camera2.impl.Camera2Initializer
 ADDED from [androidx.camera:camera-camera2:1.0.0-alpha04] /home/kch/.gradle/caches/transforms-3/68a58a9ba93bc86cc6cdb00555d731d8/transformed/jetified-camera-camera2-1.0.0-alpha04/AndroidManifest.xml:25:9-30:43
 	android:authorities

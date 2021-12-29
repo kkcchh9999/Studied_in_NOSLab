@@ -7,8 +7,10 @@ org/tensorflow/lite/examples/transfer/LoggingBenchmark.java
  org.tensorflow.lite.examples.transfer.LoggingBenchmark
 org/tensorflow/lite/examples/transfer/HelpDialog.java
  org.tensorflow.lite.examples.transfer.HelpDialog
-org/tensorflow/lite/examples/transfer/ReadCSV.java
- org.tensorflow.lite.examples.transfer.ReadCSV
+org/tensorflow/lite/examples/transfer/CameraFragment.java
+ org.tensorflow.lite.examples.transfer.CameraFragment
+ org.tensorflow.lite.examples.transfer.CameraFragment$1
+ org.tensorflow.lite.examples.transfer.CameraFragment$2
 org/tensorflow/lite/examples/transfer/PermissionsFragment.java
  org.tensorflow.lite.examples.transfer.PermissionsFragment
  org.tensorflow.lite.examples.transfer.PermissionsFragment$PermissionsAcquiredListener
@@ -18,10 +20,8 @@ org/tensorflow/lite/examples/transfer/databinding/CameraFragmentBinding.java
  org.tensorflow.lite.examples.transfer.databinding.CameraFragmentBinding
 org/tensorflow/lite/examples/transfer/BuildConfig.java
  org.tensorflow.lite.examples.transfer.BuildConfig
-org/tensorflow/lite/examples/transfer/CameraFragment.java
- org.tensorflow.lite.examples.transfer.CameraFragment
- org.tensorflow.lite.examples.transfer.CameraFragment$1
- org.tensorflow.lite.examples.transfer.CameraFragment$2
+org/tensorflow/lite/examples/transfer/ReadCSV.java
+ org.tensorflow.lite.examples.transfer.ReadCSV
 org/tensorflow/lite/examples/transfer/MainActivity.java
  org.tensorflow.lite.examples.transfer.MainActivity
 org/tensorflow/lite/examples/transfer/TransferLearningModelWrapper.java

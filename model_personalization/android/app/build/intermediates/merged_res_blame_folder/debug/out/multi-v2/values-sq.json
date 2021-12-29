@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/kch/Study/model_personalization/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sq/values-sq.xml",
+            "outputFile": "/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sq/values-sq.xml",
             "map": [
                 {
                     "source": "/home/kch/.gradle/caches/transforms-3/e759884e8e1539e68246ec4d8729cc98/transformed/core-1.5.0/res/values-sq/values-sq.xml",

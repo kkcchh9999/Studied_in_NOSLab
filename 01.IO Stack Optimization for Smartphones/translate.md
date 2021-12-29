@@ -1,4 +1,5 @@
 # 스마트폰의 입출력 스택 최적화
+## I/O Stack Optimization for Smartphones
 
 ## 요약 :
 Android 입출력 스택은 통합 행동이 잘 어우러지지 않은 정교하고 성숙한 구성요소로 이루어 져 있어 개선의 여지가 남아있다. 

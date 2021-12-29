@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/kch/Study/model_personalization/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldrtl-v17/values-ldrtl-v17.xml",
+            "outputFile": "/home/kch/Study/Studied_in_NOSLab/model_personalization/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldrtl-v17/values-ldrtl-v17.xml",
             "map": [
                 {
                     "source": "/home/kch/.gradle/caches/transforms-3/e44905d88435b8a284dfc0fee1bf9165/transformed/material-1.4.0/res/values-ldrtl-v17/values-ldrtl-v17.xml",
