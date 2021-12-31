@@ -105,7 +105,7 @@ MobileNet의 가장 낮은 레이어(pool6)에서 잠재 replay 버퍼를 낮추
 어플리케이션 내부에서, 유저는 4개의 다른 클래스 샘플을 카메라를 통해 추가할 수 있다.
 이 샘플들은 사용자가 테스트하려는 시나리오에 따라 두 모델을 일괄적으로 또는 점진적으로 훈련하는 데 사용할 수 있다.
 이 어플리케이션의 추론 결과는 그림 7에서 볼 수 있다. 
-APK와 소스코드는 [GitLab page](https://gitlab.com/riselear/public/continuallearning-on-the-edge-with-tensorflow-lite)에서 찾아볼 수 있다. 
+APK와 소스코드는 [GitLab page](https://gitlab.com/riselear/public/continual-learning-on-the-edge-with-tensorflow-lite)에서 찾아볼 수 있다. 
 
 ### 4.1 Expermenting with Different Scenarios
 TL 모델에 비해 CL 모델의 성능과 강점을 증명하기 위해, 우리는 세가지 다른 시나리오를 실험에 포함했다: 
