@@ -20,6 +20,7 @@ import android.util.Log;
 import java.io.Closeable;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import org.tensorflow.lite.Interpreter;
@@ -53,10 +54,13 @@ public class LiteMultipleSignatureModel implements Closeable {
   float[] loadBottleneck(float[][][] image) {
     Map<String, Object> inputs = new HashMap<>();
     inputs.put("feature", new float[][][][] {image});
+    float[][][][] a = new float[][][][] {image};
     Map<String, Object> outputs = new HashMap<>();
     float[][] bottleneck = new float[1][BOTTLENECK_SIZE];
     outputs.put("bottleneck", bottleneck);
     this.interpreter.runSignature(inputs, outputs, "load");
+    Log.d("로드Bottleneck", bottleneck[0].length + " ");
+
     return bottleneck[0];
   }
 

@@ -68,10 +68,10 @@ class TransferLearningModel(tf.Module):
     Returns:
       Map of the bottleneck.
     """
-    x = tf.keras.applications.mobilenet_v2.preprocess_input(
-        tf.multiply(feature, 255))
-    bottleneck = tf.reshape(
-        self.base(x, training=False), (-1, self.num_features))
+    x = tf.keras.applications.mobilenet_v2.preprocess_input(  #0~255 사이의 값을 전처리해서 -1 ~ 1 사이의 값으로 변환 
+        tf.multiply(feature, 255))  #입력받은 feature에 각 원소들에 255를 곱함 -> 0~255 사이의 값으로 변환
+    bottleneck = tf.reshape(  #형태 변경 
+        self.base(x, training=False), (-1, self.num_features))  #모바일넷에 넣는 데이터 -> 알아서 측정한값 * 62720
     return {'bottleneck': bottleneck}
 
   @tf.function(input_signature=[
