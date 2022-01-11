@@ -366,13 +366,11 @@ public class CameraFragment extends Fragment {
       int y = 0;
       for (int i = 1; i < 100; i++) {
 
-        float[][][] tmp = new float[224][224][3];
-        for (int j = 0; j < 50176; j ++) {
+        float[][][] tmp = new float[28][28][1];
+        for (int j = 0; j < 784; j ++) {
           tmp[y][x][0] = Float.parseFloat(mnist_list.get(i)[j]);
-          tmp[y][x][1] = Float.parseFloat(mnist_list.get(i)[j]);
-          tmp[y][x][2] = Float.parseFloat(mnist_list.get(i)[j]);
 
-          if (x == 223) {
+          if (x == 27) {
             y ++;
             x = 0;
           } else {
@@ -381,7 +379,6 @@ public class CameraFragment extends Fragment {
         }
         tlModel.addSample(tmp, label_list.get(i)[0]).get();
         viewModel.increaseNumSamples(label_list.get(i)[0]);
-
         y = 0;
       }
     } catch (Exception e) {

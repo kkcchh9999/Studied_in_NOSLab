@@ -21,7 +21,7 @@ import os
 import numpy as np
 import tensorflow as tf
 
-IMG_SIZE = 224
+IMG_SIZE = 28
 NUM_FEATURES = 7 * 7 * 1280
 NUM_CLASSES = 10
 
@@ -71,7 +71,7 @@ class TransferLearningModel(tf.Module):
     x = tf.keras.applications.mobilenet_v2.preprocess_input(  #0~255 사이의 값을 전처리해서 -1 ~ 1 사이의 값으로 변환 
         tf.multiply(feature, 255))  #입력받은 feature에 각 원소들에 255를 곱함 -> 0~255 사이의 값으로 변환
     bottleneck = tf.reshape(  #형태 변경 
-        self.base(x, training=False), (-1, self.num_features))  #모바일넷에 넣는 데이터 -> 알아서 측정한값 * 62720
+        self.base(x, training=False), (-1, self.num_features)) 
     return {'bottleneck': bottleneck}
 
   @tf.function(input_signature=[

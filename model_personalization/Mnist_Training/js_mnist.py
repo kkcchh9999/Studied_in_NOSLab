@@ -94,7 +94,7 @@ class MyModel(Model): #모델 클래스
     tf.TensorSpec([None, 28, 28], tf.float32),
     ])
   def test_step(images, labels):
-    predictions = model(images)
+    predictions = self.images
     t_loss = loss_object(labels, predictions)
     test_loss(t_loss)
     test_accuracy(labels, predictions)

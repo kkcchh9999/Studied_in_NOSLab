@@ -12,14 +12,6 @@ IMG_SIZE = 28
 class Model(tf.Module):
     
     def __init__(self): 
-        # trainable weights and bias for softmax
-        self.ws = tf.Variable(
-            tf.zeros((self.num_features, self.num_classes)),
-            name='ws',
-            trainable=True)
-        self.bs = tf.Variable(
-            tf.zeros((1, self.num_classes)), name='bs', trainable=True)
-       
         self.model = tf.keras.Sequential([
             tf.keras.layers.Flatten(input_shape=(IMG_SIZE, IMG_SIZE), name='flatten'),
             tf.keras.layers.Dense(128, activation='relu', name = 'dense_1'),
