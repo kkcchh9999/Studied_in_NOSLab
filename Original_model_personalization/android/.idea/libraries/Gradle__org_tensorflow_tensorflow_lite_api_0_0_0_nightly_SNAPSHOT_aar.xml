@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: org.tensorflow:tensorflow-lite-api:0.0.0-nightly-SNAPSHOT@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/caches/transforms-3/78cbbe17927fc3f3fca6dfee62c3e815/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/caches/transforms-3/78cbbe17927fc3f3fca6dfee62c3e815/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/res" />
+      <root url="file://$USER_HOME$/caches/transforms-3/78cbbe17927fc3f3fca6dfee62c3e815/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/caches/transforms-3/7914418c9e7de0c572dc8e67063a6e0b/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/res" />
+      <root url="file://$USER_HOME$/caches/transforms-3/32640899c97538db381054f978799c00/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/res" />
+      <root url="file://$USER_HOME$/caches/transforms-3/32640899c97538db381054f978799c00/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/caches/transforms-3/32640899c97538db381054f978799c00/transformed/jetified-tensorflow-lite-api-0.0.0-nightly-SNAPSHOT/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
