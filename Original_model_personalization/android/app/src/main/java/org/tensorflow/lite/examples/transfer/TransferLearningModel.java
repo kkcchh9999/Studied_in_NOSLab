@@ -16,12 +16,21 @@ limitations under the License.
 package org.tensorflow.lite.examples.transfer;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
+import android.os.Environment;
+import android.os.storage.StorageManager;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
+
+import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -43,6 +52,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /** Represents a "partially" trainable model that is based on some other, base model. */
 public final class TransferLearningModel implements Closeable {
 
+  String path = Environment.getExternalStorageDirectory().getAbsolutePath();
   /**
    * Prediction for a single class produced by the model.
    */
@@ -161,21 +171,20 @@ public final class TransferLearningModel implements Closeable {
             float[] bottleneck = model.loadBottleneck(image); //이미지의 bottleneck 추출 float[62720]
             trainingSamples.add(new TrainingSample(bottleneck, oneHotEncodedClass.get(className))); //훈련 샘플 추가, bottleneck, on hot encoding
 
-
-            @SuppressLint("SdCardPath") String path = "/data/data/org.tensorflow.lite.examples.transfer.api/files";
-            Log.d("파일 왜이럼", path);
+            //파일입출력, 파일 추가
             File dir = new File(path);
             if (!dir.exists()) {
-              dir.mkdir();
-              Log.d("파일 존재?","ㄴ");
+              dir.mkdirs();
+              Log.d("폴더 존재여부", "새로 생성함");
             }
             File file = new File(dir + "/sample.txt");
             if (!file.exists()) {
-              Log.d("파일 왜이럼", file.getAbsolutePath());
               file.createNewFile();
+              Log.d("파일 존재여부", "새로 생성함");
             }
             FileWriter writer = new FileWriter(file, true);
-            writer.write(Arrays.toString(bottleneck)+"/"+ Arrays.toString(oneHotEncodedClass.get(className)));
+            writer.write( Arrays.toString(oneHotEncodedClass.get(className))+"/"+Arrays.toString(bottleneck));
+            writer.write("\n");
             writer.flush();
             writer.close();
           } catch (Exception e) {
@@ -196,6 +205,7 @@ public final class TransferLearningModel implements Closeable {
    * @param lossConsumer callback to receive loss values, may be null.
    * @return future that is resolved when training is finished.
    */
+  @RequiresApi(api = Build.VERSION_CODES.O)
   public Future<Void> train(int numEpochs, LossConsumer lossConsumer) {
     checkNotTerminating();  //종료되었는지 확인
     int trainBatchSize = getTrainBatchSize(); //훈련 배치 사이즈 가져오기
@@ -207,6 +217,23 @@ public final class TransferLearningModel implements Closeable {
               trainBatchSize, trainingSamples.size()));
     }
 
+    //파일입출력, 파일 추가
+    try {
+      File file = new File(path + "/sample.txt");
+      BufferedReader reader = new BufferedReader(new FileReader(file));
+
+      StringBuffer buffer = new StringBuffer();
+      String line = "";
+      while ((line = reader.readLine()) != null) {
+        buffer.append(line);
+        Log.d("파일 테스트", + Files.lines(Paths.get(path+"/sample.txt")).count() +
+                String.valueOf(buffer));
+      }
+      reader.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
     trainingBatchBottlenecks = new float[trainBatchSize][numBottleneckFeatures()];  //배치 사이즈 * bottlenecks 크기
     trainingBatchLabels = new float[trainBatchSize][this.classes.size()]; //배치 사이즈 * 라벨
 
@@ -214,8 +241,6 @@ public final class TransferLearningModel implements Closeable {
         () -> {
           trainingInferenceLock.lock(); //lock
           try {
-
-            Log.d("이거 몇번 실행함?", "몇번이나?");
             epochLoop:  //go to 구문  //다시 실
             for (int epoch = 0; epoch < numEpochs; epoch++) { //에폭 수 만큼 for 루프
               float totalLoss = 0;  //총 loss 값
