@@ -1,12 +1,2 @@
-org/tensorflow/lite/examples/transfer/api/ModelLoader.java
- org.tensorflow.lite.examples.transfer.api.ModelLoader
 org/tensorflow/lite/examples/transfer/api/BuildConfig.java
  org.tensorflow.lite.examples.transfer.api.BuildConfig
-org/tensorflow/lite/examples/transfer/api/LiteMultipleSignatureModel.java
- org.tensorflow.lite.examples.transfer.api.LiteMultipleSignatureModel
-org/tensorflow/lite/examples/transfer/api/TransferLearningModel.java
- org.tensorflow.lite.examples.transfer.api.TransferLearningModel
- org.tensorflow.lite.examples.transfer.api.TransferLearningModel$1
- org.tensorflow.lite.examples.transfer.api.TransferLearningModel$LossConsumer
- org.tensorflow.lite.examples.transfer.api.TransferLearningModel$Prediction
- org.tensorflow.lite.examples.transfer.api.TransferLearningModel$TrainingSample

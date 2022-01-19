@@ -13,11 +13,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package org.tensorflow.lite.examples.transfer.api;
+package org.tensorflow.lite.examples.transfer;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import java.io.Closeable;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -157,7 +160,28 @@ public final class TransferLearningModel implements Closeable {
           try {
             float[] bottleneck = model.loadBottleneck(image); //이미지의 bottleneck 추출 float[62720]
             trainingSamples.add(new TrainingSample(bottleneck, oneHotEncodedClass.get(className))); //훈련 샘플 추가, bottleneck, on hot encoding
-          } finally {
+
+
+            @SuppressLint("SdCardPath") String path = "/data/data/org.tensorflow.lite.examples.transfer.api/files";
+            Log.d("파일 왜이럼", path);
+            File dir = new File(path);
+            if (!dir.exists()) {
+              dir.mkdir();
+              Log.d("파일 존재?","ㄴ");
+            }
+            File file = new File(dir + "/sample.txt");
+            if (!file.exists()) {
+              Log.d("파일 왜이럼", file.getAbsolutePath());
+              file.createNewFile();
+            }
+            FileWriter writer = new FileWriter(file, true);
+            writer.write(Arrays.toString(bottleneck)+"/"+ Arrays.toString(oneHotEncodedClass.get(className)));
+            writer.flush();
+            writer.close();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+          finally {
             trainingInferenceLock.unlock();
           }
 

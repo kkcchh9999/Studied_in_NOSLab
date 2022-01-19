@@ -17,19 +17,23 @@ package org.tensorflow.lite.examples.transfer;
 
 import android.Manifest.permission;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 /**
  * The sole purpose of this fragment is to request the necessary permissions.
  * It does not create a view.
  */
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class PermissionsFragment extends Fragment {
 
   private static final int PERMISSIONS_REQUEST_CODE = 10;
-  private static final String[] PERMISSIONS_REQUIRED = { permission.CAMERA };
+  private static final String[] PERMISSIONS_REQUIRED = { permission.CAMERA, permission.MANAGE_EXTERNAL_STORAGE, permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE };
 
   private PermissionsAcquiredListener callback;
 

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/kch/Study/Original_model_personalization/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-fi/values-fi.xml",
+            "outputFile": "/home/kch/Study/Studied_in_NOSLab/Original_model_personalization/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-fi/values-fi.xml",
             "map": [
                 {
                     "source": "/home/kch/caches/transforms-3/e759884e8e1539e68246ec4d8729cc98/transformed/core-1.5.0/res/values-fi/values-fi.xml",

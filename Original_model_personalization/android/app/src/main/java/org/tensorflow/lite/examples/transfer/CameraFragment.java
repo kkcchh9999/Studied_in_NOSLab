@@ -63,7 +63,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
 import org.tensorflow.lite.examples.transfer.CameraFragmentViewModel.TrainingState;
-import org.tensorflow.lite.examples.transfer.api.TransferLearningModel.Prediction;
+import org.tensorflow.lite.examples.transfer.TransferLearningModel.Prediction;
 import org.tensorflow.lite.examples.transfer.databinding.CameraFragmentBinding;
 
 /**

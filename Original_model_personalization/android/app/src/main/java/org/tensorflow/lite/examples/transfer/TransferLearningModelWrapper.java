@@ -21,10 +21,9 @@ import java.io.Closeable;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import org.tensorflow.lite.examples.transfer.api.ModelLoader;
-import org.tensorflow.lite.examples.transfer.api.TransferLearningModel;
-import org.tensorflow.lite.examples.transfer.api.TransferLearningModel.LossConsumer;
-import org.tensorflow.lite.examples.transfer.api.TransferLearningModel.Prediction;
+
+import org.tensorflow.lite.examples.transfer.TransferLearningModel.LossConsumer;
+import org.tensorflow.lite.examples.transfer.TransferLearningModel.Prediction;
 
 /**
  * App-layer wrapper for {@link TransferLearningModel}.
