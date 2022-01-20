@@ -22,6 +22,8 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import org.tensorflow.lite.examples.transfer.Database.SampleRepository;
+
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.File;
@@ -51,7 +53,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /** Represents a "partially" trainable model that is based on some other, base model. */
 public final class TransferLearningModel implements Closeable {
 
-  String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+  SampleRepository sampleRepository = SampleRepository.get();
   /**
    * Prediction for a single class produced by the model.
    */
@@ -73,15 +75,6 @@ public final class TransferLearningModel implements Closeable {
     }
   }
 
-  private static class TrainingSample {
-    float[] bottleneck;
-    float[] label;
-
-    TrainingSample(float[] bottleneck, float[] label) {
-      this.bottleneck = bottleneck;
-      this.label = label;
-    }
-  }
 
   /**
    * Consumer interface for training loss.
@@ -168,56 +161,9 @@ public final class TransferLearningModel implements Closeable {
           trainingInferenceLock.lockInterruptibly();//interrupt 가능한 lock
           try {
             float[] bottleneck = model.loadBottleneck(image); //이미지의 bottleneck 추출 float[62720]
-//            trainingSamples.add(new TrainingSample(bottleneck, oneHotEncodedClass.get(className))); //훈련 샘플 추가, bottleneck, on hot encoding
-//            Log.d("sample data", "bottleneck length: " + bottleneck.length + "\nbottleneck: " +Arrays.toString(bottleneck));
-
-//            파일입출력, 파일 추가
-            String path = Environment.getExternalStorageDirectory().getAbsolutePath();
-            File dir = new File(path);
-            if (!dir.exists()) {
-              dir.mkdirs();
-            }
-            File file = new File(dir + "/sample.txt");
-            if (!file.exists()) {
-              file.createNewFile();
-            }
-            FileWriter writer = new FileWriter(file, true);
-            writer.write( Arrays.toString(oneHotEncodedClass.get(className)).replace("[", "").replace("]","")
-                    +"/"+Arrays.toString(bottleneck).replace("[", "").replace("]",""));
-            writer.write("\n");
-            writer.flush();
-            writer.close();
-          } catch (Exception e) {
-            e.printStackTrace();
+            trainingSamples.add(new TrainingSample(bottleneck, oneHotEncodedClass.get(className))); //훈련 샘플 추가, bottleneck, on hot encoding
+            sampleRepository.addTrainingSample(new TrainingSample(bottleneck, oneHotEncodedClass.get(className)));
           }
-
-          //파일입출력, 파일 읽기
-          try {
-            File file = new File(path + "/sample.txt");
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-
-            StringBuffer buffer = new StringBuffer();
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-              String tmp[] = line.replace(" ", "").trim().split("[\n\\[\\],/ ]");
-              float[] tmpClass = new float[4];
-              float[] tmpBottleneck = new float[tmp.length-4];
-              for (int i = 0; i < tmp.length; i ++) {
-                if (i < 4) {
-                  tmpClass[i] = Float.parseFloat(tmp[i]);
-                } else {
-                  tmpBottleneck[i-4] = Float.parseFloat(tmp[i]);
-                }
-              }
-              Log.d("Read sample data: ", Arrays.toString(tmpBottleneck));
-              trainingSamples.add(new TrainingSample(tmpBottleneck,tmpClass));
-            }
-            reader.close();
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-
-
           finally {
             trainingInferenceLock.unlock();
           }

@@ -20,17 +20,17 @@ org/tensorflow/lite/examples/transfer/DataBindingTriggerClass.java
  org.tensorflow.lite.examples.transfer.DataBindingTriggerClass
 org/tensorflow/lite/examples/transfer/BuildConfig.java
  org.tensorflow.lite.examples.transfer.BuildConfig
-org/tensorflow/lite/examples/transfer/TransferLearningModelWrapper.java
- org.tensorflow.lite.examples.transfer.TransferLearningModelWrapper
+org/tensorflow/lite/examples/transfer/CameraFragment.java
+ org.tensorflow.lite.examples.transfer.CameraFragment
+ org.tensorflow.lite.examples.transfer.CameraFragment$1
+ org.tensorflow.lite.examples.transfer.CameraFragment$2
 org/tensorflow/lite/examples/transfer/TransferLearningModel.java
  org.tensorflow.lite.examples.transfer.TransferLearningModel
  org.tensorflow.lite.examples.transfer.TransferLearningModel$1
  org.tensorflow.lite.examples.transfer.TransferLearningModel$LossConsumer
  org.tensorflow.lite.examples.transfer.TransferLearningModel$Prediction
  org.tensorflow.lite.examples.transfer.TransferLearningModel$TrainingSample
-org/tensorflow/lite/examples/transfer/CameraFragment.java
- org.tensorflow.lite.examples.transfer.CameraFragment
- org.tensorflow.lite.examples.transfer.CameraFragment$1
- org.tensorflow.lite.examples.transfer.CameraFragment$2
 org/tensorflow/lite/examples/transfer/MainActivity.java
  org.tensorflow.lite.examples.transfer.MainActivity
+org/tensorflow/lite/examples/transfer/TransferLearningModelWrapper.java
+ org.tensorflow.lite.examples.transfer.TransferLearningModelWrapper
