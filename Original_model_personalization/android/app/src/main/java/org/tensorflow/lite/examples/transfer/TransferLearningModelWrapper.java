@@ -16,7 +16,11 @@ limitations under the License.
 package org.tensorflow.lite.examples.transfer;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.ConditionVariable;
+
+import androidx.annotation.RequiresApi;
+
 import java.io.Closeable;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
@@ -39,6 +43,7 @@ public class TransferLearningModelWrapper implements Closeable {
   private final ConditionVariable shouldTrain = new ConditionVariable();
   private volatile LossConsumer lossConsumer;
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   TransferLearningModelWrapper(Context context) {
     model = //모델 생성(모델 로더, 클래스들)
         new TransferLearningModel(

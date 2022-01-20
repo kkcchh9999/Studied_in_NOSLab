@@ -15,7 +15,10 @@ limitations under the License.
 
 package org.tensorflow.lite.examples.transfer;
 
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentActivity;
 
 /**
@@ -23,6 +26,7 @@ import androidx.fragment.app.FragmentActivity;
  */
 public class MainActivity extends FragmentActivity {
 
+  @RequiresApi(api = Build.VERSION_CODES.R)
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -34,6 +38,7 @@ public class MainActivity extends FragmentActivity {
     if (savedInstanceState != null) {
       return;
     }
+
 
     PermissionsFragment firstFragment = new PermissionsFragment();
 

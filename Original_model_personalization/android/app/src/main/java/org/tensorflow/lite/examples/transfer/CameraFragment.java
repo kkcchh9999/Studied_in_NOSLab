@@ -20,6 +20,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -40,6 +41,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.camera.core.CameraX;
 import androidx.camera.core.CameraX.LensFacing;
@@ -320,13 +323,13 @@ public class CameraFragment extends Fragment {
 
     float xScale = scaledWidth / (float) viewFinderDimens.getWidth(); //가로 / viewfinder 가로
     float yScale = scaledHeight / (float) viewFinderDimens.getHeight(); //세로 / viewfinder 세로
-    Log.d("이건 또 뭐임", "centerX, centerY, scaledWidth, scaledHeight, xScale, yScale" + centerX +" " + centerY + " " + scaledWidth + " " + scaledHeight + " " + xScale + " " + yScale);
     matrix.preScale(xScale, yScale, centerX, centerY);//0.913, 1.0, 540, 1096,
     //preScale(sx, sy, px, py) -> M' = M * S(sx, sy, px, py)
 
     viewFinder.setTransform(matrix);  //행렬에 맞춰서 textureView 설정
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.O)
   @Override
   public void onCreate(Bundle bundle) {
     super.onCreate(bundle);
@@ -343,6 +346,13 @@ public class CameraFragment extends Fragment {
     dataBinding.setLifecycleOwner(getViewLifecycleOwner());
     dataBinding.setVm(viewModel);
     View rootView = dataBinding.getRoot();
+//
+//    for (int i = 0; i < 1000; i++) {
+//      addSampleRequests.add("1");
+//      addSampleRequests.add("2");
+//      addSampleRequests.add("3");
+//      addSampleRequests.add("4");
+//    }
 
     for (int buttonId : new int[] { //버튼 클릭리스너
         R.id.class_btn_1, R.id.class_btn_2, R.id.class_btn_3, R.id.class_btn_4}) {

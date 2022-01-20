@@ -15,10 +15,9 @@ limitations under the License.
 
 package org.tensorflow.lite.examples.transfer;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
-import android.os.storage.StorageManager;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
@@ -169,27 +168,56 @@ public final class TransferLearningModel implements Closeable {
           trainingInferenceLock.lockInterruptibly();//interrupt 가능한 lock
           try {
             float[] bottleneck = model.loadBottleneck(image); //이미지의 bottleneck 추출 float[62720]
-            trainingSamples.add(new TrainingSample(bottleneck, oneHotEncodedClass.get(className))); //훈련 샘플 추가, bottleneck, on hot encoding
+//            trainingSamples.add(new TrainingSample(bottleneck, oneHotEncodedClass.get(className))); //훈련 샘플 추가, bottleneck, on hot encoding
+//            Log.d("sample data", "bottleneck length: " + bottleneck.length + "\nbottleneck: " +Arrays.toString(bottleneck));
 
-            //파일입출력, 파일 추가
+//            파일입출력, 파일 추가
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath();
             File dir = new File(path);
             if (!dir.exists()) {
               dir.mkdirs();
-              Log.d("폴더 존재여부", "새로 생성함");
             }
             File file = new File(dir + "/sample.txt");
             if (!file.exists()) {
               file.createNewFile();
-              Log.d("파일 존재여부", "새로 생성함");
             }
             FileWriter writer = new FileWriter(file, true);
-            writer.write( Arrays.toString(oneHotEncodedClass.get(className))+"/"+Arrays.toString(bottleneck));
+            writer.write( Arrays.toString(oneHotEncodedClass.get(className)).replace("[", "").replace("]","")
+                    +"/"+Arrays.toString(bottleneck).replace("[", "").replace("]",""));
             writer.write("\n");
             writer.flush();
             writer.close();
           } catch (Exception e) {
             e.printStackTrace();
           }
+
+          //파일입출력, 파일 읽기
+          try {
+            File file = new File(path + "/sample.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            StringBuffer buffer = new StringBuffer();
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+              String tmp[] = line.replace(" ", "").trim().split("[\n\\[\\],/ ]");
+              float[] tmpClass = new float[4];
+              float[] tmpBottleneck = new float[tmp.length-4];
+              for (int i = 0; i < tmp.length; i ++) {
+                if (i < 4) {
+                  tmpClass[i] = Float.parseFloat(tmp[i]);
+                } else {
+                  tmpBottleneck[i-4] = Float.parseFloat(tmp[i]);
+                }
+              }
+              Log.d("Read sample data: ", Arrays.toString(tmpBottleneck));
+              trainingSamples.add(new TrainingSample(tmpBottleneck,tmpClass));
+            }
+            reader.close();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+
+
           finally {
             trainingInferenceLock.unlock();
           }
@@ -215,23 +243,6 @@ public final class TransferLearningModel implements Closeable {
           String.format(
               "Too few samples to start training: need %d, got %d",
               trainBatchSize, trainingSamples.size()));
-    }
-
-    //파일입출력, 파일 추가
-    try {
-      File file = new File(path + "/sample.txt");
-      BufferedReader reader = new BufferedReader(new FileReader(file));
-
-      StringBuffer buffer = new StringBuffer();
-      String line = "";
-      while ((line = reader.readLine()) != null) {
-        buffer.append(line);
-        Log.d("파일 테스트", + Files.lines(Paths.get(path+"/sample.txt")).count() +
-                String.valueOf(buffer));
-      }
-      reader.close();
-    } catch (Exception e) {
-      e.printStackTrace();
     }
 
     trainingBatchBottlenecks = new float[trainBatchSize][numBottleneckFeatures()];  //배치 사이즈 * bottlenecks 크기
