@@ -1,5 +1,5 @@
 # 효율적인 스왑을 위한 스마트폰 I/O 특성 분석 
-## 04. Analysis of Smartphone I/O Characteristics - Toward Efficient Swap in a Smartphone
+## Analysis of Smartphone I/O Characteristics - Toward Efficient Swap in a Smartphone
 
 ## Abstract 
 최근의 모바일 플랫폼 기술 발전으로 인해 사람들은 스마트폰을 통해 더 많은 일을 하고 있다.
