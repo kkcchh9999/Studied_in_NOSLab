@@ -147,7 +147,7 @@ GeekBench 나 AnTuTu 같은 인기있는 벤치마크들은 연산 집약적이�
 그러므로 우리는 안드로이드 커널의멀티쓰레딩, 스케줄링, 바인더, 스토리지와 파일시스템과같은 핵심 안드로이드 시스템 컴포넌트의 성능을 측정하기 위해 벤치마크를 수집하고 구현했다.  
 
 이전 연구는 안드로이드의 정확한 벤치마킹 성능을 측정하는것은 어렵다고 말한다.
-성능 결과를 유효하고 안정적인지 확인하기 위해, 우리는 CPU 스케일링 관리자를 `performence`로 설정하고, 벤치마크의 CPU 선호도를 설정하기 위해 `taskset` 명령을 사용하고, `thermal-engine` 이나 `mpdecision` 같은 성능 조절 서비스를 정지한다.
+성능 결과를 유효하고 안정적인지 확인하기 위해, 우리는 CPU 스케일링 관리자를 `performence`로 설정하고, 벤치마크의 CPU affinity를 설정하기 위해 `taskset` 명령을 사용하고, `thermal-engine` 이나 `mpdecision` 같은 성능 조절 서비스를 정지한다.
 
 #### 4.1.1 MultiThreading and Task Scheduling
 안드로이드 어플리케이션은 일반적으로 멀티쓰레드를 사용한다. 
@@ -173,4 +173,50 @@ GeekBench 나 AnTuTu 같은 인기있는 벤치마크들은 연산 집약적이�
 다른 하나는 포그라운드에서 벤치마크 결과를 나타내기 위해 동작한다. 
 두 어플리케이션은 그들 간의 바인더 IPC를 통해 의사소통한다. 
 성능 측정 과정은 다음과 같다:
- 1. 포그라운드 어플리케이션은 UI 버튼의 onClick 이벤트에 응답한다. 이는 
+ 1. 포그라운드 어플리케이션은 UI 버튼의 onClick 이벤트에 응답한다. 이는 `android.os.Messenger` 인스턴스를 `android.content.Intent`에 넣고, `android.content.Context` 클래스의 `startService` 메소드를 호출하여 백그라운드 서비스를 시작한다.
+ 2. 백그라운드 서비스는 `IntentService` 클래스의 `onHandleIntent` 이벤트에 반응하고, 현재 프로세스의 `Messenger` 인스턴스를 포그라운드 어플리케이션의 `Messenger` 인스턴스의 `send` 메소드를 통해 포그라운드 어플리케이션으로 보낸다.
+ 3. 포그라운드 어플리케이션은 `Messenger` 인스턴스에 바인딩되는 `android.os.Handler` 클래스의 `handleMessage` 이벤트에 응답하고, 백그라운드 서비스와 `Messenger` 인스턴스를 통해 의사소통한다. 이는 벤치마크 동시성에따라 여러 메세지를 동시에 보낸다.
+ 4. 백그라운드 서비스는 `Messenger` 인스턴스에 바인딩된 `Handler` 클래스의`handleMEssage` 이벤트에 응답하고, 포그라운드 어플리케이션과 `Messenger` 인스턴스로 의사소통한다. 
+ 5. 이전의 두 단계는 반복적으로 실행된다. 포그라운드 어플리케이션은 Binder IPC 처리량을 연산하고, 결과를 나타낸다. 
+
+#### 4.1.3 Storage and File System
+스토리지와 파일시스템은 매우 중요한 OS 컴포넌트이다. 
+성능을 측정하기 위해, 우리는 SQLite를 선택했고, 이는 안드로이드 어플리케이션에서 벤치마크로 널리 사용되는 임베디드 데이터베이스다. 
+우리가 사용한 어플리케이션은 `speedtest1`이고, 이는 SQLite의 공식 벤치마크 어플리케이션이다. 
+우리는 ARM과 ARM64 버전을 크로스컴파일 해서 안드로이드 스마트폰에서 동작했다. 
+테스트 로드 파라미터 `--size`는 20으로 설정하고, 테스트 데이터베이스 파일은 데이터 파티션에 들어간다.   
+
+### 4.2 Devices and Experimental Setup
+우리의 실험에서 사용된 안드로이드 스마트폰들은 Nexus 5X, Nexus 6, Nexus 5이고, 이들은 구글에서 공식적으로 발행되었다. 표 3은 그들의 상세정보를 나타낸다.  
+
+Nexus 5X에 사용된 퀄컴의 스냅드래곤 808 프로세서는 ARMv8-A 64bit 명령어 셋 아키텍처를 채택했다.
+프로세서는 6개의 코어를 가지고, 그 중 두 개는 1.82 GHz의 피크 주파수를 가지는 Cortex-A57 기반이고, 네 개는 1.44 GHz의 피크 주파수를 가지는 Cortex-A53을 기반으로 한다.
+Nexus 5X를 위해 사용할 컴파일러는 GCC 6.4 ARM64 크로스 컴팡일러이다. Cortex-A57 코어와 Coretex-A53 코어의 주파수가 상당히 다르기 때문에, 우리는 작업 명령을 사용하여 CPU affinity를 설정할 때 벤치마크를 같은 타입의 코어에서 실행하도록 명시했다.    
+
+Nexus 6에 사용된 퀄컴 스냅드래곤 805 프로세서는 ARMv7-A 32-bit 명령어 셋 아키텍처를 채택했다.
+이는 네 개의 2.7GHz의 피크 주파수를 가지는 Krait 450 코어를 가진다. 
+Nexus 6에 사용한 컴파일러는 GCC 5.4 ARM 크로스 컴파일러를 사용했는데, GCC 6.4로 컴파일된 리눅스 커널과 -O3 가 Nexus 6에서 실행되지 않기 때문이다.  
+
+Nexus 5에 사용된 퀄컴 스냅드래곤 800 프로세서 또한 ARMv7-A 32-bit 명령어 셋 아키텍처를 채택했다.
+이는 네 개의 2.26GHz 피크 주파수를 가지는 Krait 400 코어를 가진다. 
+Nexus 5에 사용한 컴파일러 또한 GCC 5.4 ARM 크로스 컴파일러이고, GCC 6.4로 컴파일된 리눅스 커널과 -Os 가 Nexus 5에서 실행되지 않기 때문이다.  
+
+세 개의 휴대전화들은 LineageOS 14.1을 실행하고, 이는 안드로이드 7.1.2를 기반으로 하며, 유명한 CyanogenMod 프로젝트의 연속이다.
+LineageOS를 설치하기 위해, 우리는 휴대전화를 위한 부트로더를 해제하고, TWRP 리커버리를 flash 한다.
+성능 검증을 위해, 우리는 휴대폰들의 루트 권한을 획득하기 위한 LineageOS 의 `su` 애드온을 설치했다.  
+
+세 휴대전화의 리눅스 커널 버전은 구버전이다.
+Nexus 5X와 Nexus 6에 사용된 Linux 3.10은 2013년에 공개되었고, Nexus 5에 사용된 Linux 3.4는 2012년에 공개되었다.
+이는 안드로이드 스마트폰에게 흔한 이슈이다.
+왜냐하면 휴대전화의 몇몇 장치 드라이버는 소스 바이너리가 잠겨있고, 우리가 커널을 수동으로 업데이트 할 수 없기 때문이다.
+우리가 사용한 커널 빌드 구성은 LineageOS에서 기본으로 제공되며, `lineageos_bullhead_defconfig`, `shanu_defconfig`, `lineageos_hammerhead_defconfig`가 각각 Nexus 5X, Nexus 6, Nexus 5에 상응하게 사용되었다.   
+
+Nexus 5X의 경우, 우리는 부팅 파라미터 `kernel-offset`, `tags-offset`, `ramdisk-offset` 을 수정할 필요가 있었다. 이는 커널 이미지가 겹치는 걸 방지하고 램디스크를 물리적 주소공간에서 실행하고 instrumented 커널을 휴대전화에서 실행하기 위함이다.  
+
+Nexus 6의 경우, 우리는 그것의 부팅 파라미터가 안드로이드 부트로더 내부에 구성되어 있음을 알아냈다.
+그러므로 선택적으로 instrumentation을 진행해 instrumented 커널을 빌드하고, 컴파일러 옵션을 선택하여 최적화된 커널을 구축한다.  
+
+Nexus 5의 경우, instrumented 커널을 전화기에서 부팅하기 위해 파라미터 `tags-offset` 과 `ramdisk-offset`의 값을 증가시키기만 하면 된다. 
+
+### 4.3 Result and Analysis
+우리는 -O2, -Os, -O3 및 PDO를 포함한 다양한 GCC 최적화 구성으로 컴파일된 커널을 사용하여 각 폰에 대해 서로 다른 벤치마크를 실행했다.
