@@ -120,4 +120,107 @@ TeraCache는 커스텀한 지역 기반  allocator를 사용하고, 자바 메�
 RDDs는 항상 다른 객체를 오염시키지 않고 변하지 않고 안전하게 TeraCache로 이동할 수 있다.  
 
 **RDDs를 TeraCache 에 Caching하는것:** 
-RDD caching은 명시적으로 개발자에 의해 Spark RDD API를 통하여 관리됨으로, 우리는 두 가지 Java 에노테이션을 소개한다, @cache와 @uncache,는 Spark Block Manager상응하는 코드 포인트에 에노테이트 하기 위해. 
+RDD caching은 명시적으로 개발자에 의해 Spark RDD API를 통하여 관리됨으로, 우리는 Spark Block Manager상응하는 코드 포인트에 주석을 달기 위한 두 가지 Java 에노테이션  @cache와 @uncache 를 소개한다.
+Block Manager는 caching, 직렬화, 데이터 전송 등을 관리하는 Spark 구성 요소이다.
+우리가 소개하는 에노테이션은 RDD가 Spark에 의해 캐시되거나 캐시되지 않음을 JVM과 통신하는 구문 메타데이터이다.
+@cache 에노테이션은 RDD가 cacahing 될 것을 암시하고, TeraCache는 mark-sweep GC의 마킹 과정과 유사하게 RDD 데이터 순회를 수행하며 도달할 수 있는 모든 객체를 마킹하고 적절한 TeraCache 구역으로 이주시킨다.
+어플리케이션이 Spark Block Manager에게 cache를 요청할 때 RDD객체는 이미 생성되어있기 때문에 우리는 데이터를 직접 할당하기보다 H1에서 TeraCache로 이동한다.
+각각, @uncache 에노테이션에서, JVM은 TeraCache로 부터 RDD 블록과 그 공간을 회수할 수 있다.
+추가로, TeraCache가 용량의 한계에 도달했을 때 RDDs를 회수하기 위해 RDD의 퇴거를 처리하는(LRU 정책을 기반으로 메모리가 가득 차면) Spark Block Manager 함수를 @uncache로 사용자에게 api에 대한 주성글 추가했다.  
+
+**DR1과 DR2 사이의 DRAM의 분할:** 
+그림 2는 TeraCache가 DRAM을 다음 두 부분으로 나우는것을 나타낸다: (1) DR1은 H1을 위해 사용되고, (2) DR2는 TeraCache의 memory mapping을 위한 cache로 사용된다.
+작업 수행 중에 GC로 소모되는 시간을 줄이기 위해, DR1은 새로 생성된 객체를 가능한 많이 수용할 수 있을 만큼 충분히 커야 한다.
+동시에, DR2의 크기는 mmap I/O를 유발하는 page fault의 수를 결정하고, 이는 cached 된 데이터에 대한 평균 접근 시간에 직접적으로 영향을 미친다.
+이상적으로, 우리는 작업이 새로운 객체를 생성할때를 위해 그리고 memory mapping을 위해 충분한 공간이 필요하다. 
+하지만, DR1과 DR2가 물리적으로 DRAM을 공유하기 때문에, DR1이 클수록 DR2가 작고 반대도 동일하다.
+그러므로, 우리는 동적으로 DR1과 DR2의 크기를 조정하는 방법을 제안한다.  
+
+우리는 크기 조정의 필요 여부를 결정하기 위해 두 metric을 사용한다.
+DR1을 위해, 우리는 minor GCs/s의 빈도를 측정하는데, 빈번한 GC는 작업이 더 많은 메모리 공간(DR1)을 필요로 한다는 것을 나타내기 때문이다.
+유사하게, DR2를 위해 single memory-map의 pagefault 비율을 측정하는데, 이는 높은 비율의 page fault는 memory mapping을 위한 더 많은 공간이 필요함을 의미하기 때문이다. 
+전반적으로, pagefaults의 비율이 상승하고 minor GC의 빈도가 낮으면, 우리는 DR1의 크기를 줄이고, DR2의 크기를 증가시키고 반대의 경우도 마찬가지이다. 
+Section 3은 DR1과 DR2의 동적 크기 조정의 필요성을 보여준다.   
+
+### 2.2 Prototype Implementation
+우리는 ParallelGC를 기반으로 TeraCache의 초기 프로토타입을 구현했다.
+ParallelGC는 JVM 힙을 두 세대로 분할한다: (1) 수명이 짧은 객체를 위한 NewGen, 그리고 (2) 수명이 긴 객체를 위한 OldGen.
+NewGen은 하나의 Eden 공간 그리고 동일하게 분할된 두개의 survivor 공간들로 분할된다.
+새로운 객체는 Eden 공간에 할당되고, minorGC에서 살아남은 객체는 survivor 공간으로 이동된다.
+마지막으로 충분한 GC에서 살아남고 미리 정의된 거주 임계점에 도달한 객체는 OldGen으로 이동된다.  
+
+우리의 프로토타입에서, 우리는 NewGen을 DRAM(H1)에 배치했고 mmap OldGen을 NVMe 장치에 배치했다. 
+이 구현은 OldGen을 긴 수명을 가진 객체를 포함한 cached 데이터를 포함하는 cache로 사용한다.
+Spark Block Manager는 JVM에게 cache 명령이 수행됨을 알려주지 않는데, 어쨌거나 가비지 컬렉터는 여러번의 minor GC 수행 후에 OldGen에서 cached 된 데이터를 승격한다. 
+cached 된 데이터에서 GC를 피하기 위해, 우리는 명시적으로 OldGen 에서 GC를 삭제했다.   
+
+우리의 프로토타입은 caching만을 목표로 하고, uncache 명령 중에 cached 된 RDDs를 회수하는 것은 지원하지 않는다. 
+우리의 프로토타입은 캐시된 데이터 이외의 장수명 데이터를 Old Gen에서도 슬립할 수 있도록 한다.
+OldGen이 확실히 주로 cached 데이터를 포함하고 약간의 uncached 데이터를 가지도록 하기 위해 우리는 GC의 tenured threshhold를 25로 지정했다.
+이 threshold를 사용함으로 OldGen에 cache와 상관없는 데이터를 할당하는 것을 막았다. 
+결과적으로 OldGen에 5%의 무관한 수명이 긴 데이터가 할당되었다. 
+이를 통해 GC 시간과 I/O 트래픽을 평가할 수 있고, 이는 TeraCache의 더 완벽한 프로토타입에 의히 달성될 수 있기 때문이다. 
+
+## 3. Evaluation
+TeraCache 프로토타입 구현을 사용하여 우리는 다음과 같은 평가를 진행했다: (1) TeraCache와 하이브리드(기본) 사이의 전체적인 성능적 이점 (2) TeraCache 사용이 GC 오버헤드에 미치는 영향, 그리고 마지막으로 (3) DRAM을 DR1과 DR2로 분리한 것의 영향.
+
+**실험 환경:**우리는 Intel(R) Xen(R) E5-2630 v3 CPUs(2.4GHz, 8개의 물리적 코어, 16개의 hyper-thread, 총 32개의 thread), 그리고 32GB의 DDR4 DRAM, CentOs v7.3, Linux kernel 4.15.72를 사용하는 듀얼 소켓 서버에서 실험을 진행했다. 
+저장 장치는 PCIe가 탑재된 Samsung SSD 970 PRO 500GB를 사용했다.
+우리의 실험에서, 우리는 OpenJDK v8u250-b70과 Spark v2.3.0을 사용했고, Spark executor를 30개의 쓰레드에서 실행했다.
+우리는 TeraCache와 대항하여 하이브리드 방식의 KMeans(KM), LR, LgR 그리고 SVM 워크로드를 Spark-Bench Suite에서 검증하였다. 
+각 워크로드는 64GB 데이터셋에서 100번의 반복을 실행했다.
+또한, TeraCache의 경우 표 1에 나와 있는 다양한 구성으로 각 워크로드를 실행했지만, 하이브리드의 경우 힙 총 힙 공간의 60%를 활용하는 32GB 힙을 사용하고 전체 스토리지 디바이스를 off-heap RDD 캐시로 사용했다.  
+
+**TeraCache를 사용하는 성능적 이점:**
+그림 4는 각 벤치마크를 하이브리드(가운데)와 TeraCache(오른쪽)를 사용할 때의 전체 실행 시간을 보여준다.
+TeraCache의 경우, 표 1에 상응하는 워크로드에서 성능이 가장 좋은 구성을 표기했다(예를 들어 LR과 LgR를 위한 구성 C, KM 과 SVF를 위한 구성 D).
+하이브리드의 경우 우리는 더 많은 RDD를 on-heap 상태로 만들어 eviction을 최소화 하기 위해 가장 큰 힙사이즈를 사용했다.
+우리는 TeraCache가 하이브리드와 비교해 전체 성능을 KM, LR, LgR, SVM에서 각각 7%, 32%, 37% 그리고 20% 향상시키는 것을 관측했다.
+더 나은 이해를 위해, 실행 시간을 GC 시간과 Serdes + I/O, 기타 실행 시간으로 구분한다.  
+
+**GC 오버헤드에서 TeraCache의 성능:**
+Section 2에서 논의한 바와 같이, 그림 4는 LR, LgR, SVM 에서 각각 43%, 50%, 45%의 GC 시간이 감소함을 보여준다.
+시간 감소의 원인은 TeraCache가 cached RDD를 마크할 필요가 없기 때문이고 또, TeraCache가 DRAM 힙을 일시적인 객체를 위해서만 사용하여 GC를 적게 수행하기 때문이다.
+반면, 기존 Spark는 RDDs와 수명이 짧은 객체 둘 다 DRAM 힙에 보관하고, 직렬화된 RDD만 eviction 한다. 
+구체적으로, KM에서 우리는 5%의 GC 시간이 증가함을 발견했다. 
+우리는 KM에서의 이러한 증가를 작업이 큰 cached 데이터에 접근하지 않는 대신, H1에 많은 양의 셔플 데이터를 생성하기 때문이라 생각한다.
+H1의 작은 크기는(그림 4 (c) A, B) GC의 부담을 증가시키고 그리고 빈번한 GC를 유발한다.
+마지막으로, 심지어 GC 시간이 가장 짧은  그림 4(C)의 E에서도 아래에서 논의한것 처럼 많은 양의 page fault가 발생하기 때문에 실행 시간은 최소가 아니다.  
+
+**DR1과 DR2 사이의 DRAM 분할의 효과**
+Section 2에서 논의한 것 처럼, DRAM 분할은 전체적인 어플리케이션들의 성능에 영향을 미친다.
+그림 4 (b), (c) 그리고 (d)는 표 1에 나타난 각 워크로드의 실행 시간, GC 시간, 전체 page fault의 수를 나타낸다.
+KM은 D에서 최소의 page fault를 발생시켰지만, GC 시간이 E보다 16% 길었다.
+KM은 단계 사이에 데이터 셔플을 실행하며, B와 C 사이의 총 실행 시간이 크게 개선된 것 처럼 단계 간에 셔플 데이터를 생성함으로 실행 메모리를 위한 공간이 더 많이 필요하다.
+LR,과 LgR은 C를 SVM은 D를 사용할때 가장 적은 page fault와 가장 짧은 GC와 실행 시간을 가진다. 
+반대로, LR과 LgR은 cached된 데이터를 빈번하게 접근하고, 따라서 mmap page를 위해 사용가능한 DRAM을 증가시키는데 더 잘 응답한다.
+일반적으로, 구성별로 다양한 실행 시간은 어플리케이션의 패턴에 기인한다. 
+캐시된 데이터에 대한 더 많은 액세스가 있는 벤치마크 단계는 DR2의 더 많은 mmap 페이지에서 더 많은 이점을 얻는 반면, 더 많은 임시 객체를 생성하는 단계는 H1을 증가시키면 이점을 얻는다.
+따라서 DR1과 DR2를 실행 동안 크기를 재조정하는것은 이점이 있다.  
+
+## 4. Discussion
+TeraCache는 본질적으로 JVM 기반 데이터 처리 프레임워크임으로, annotation 알림을 인식하는 수정된 JVM을 필요로 한다.
+TeraCache는 다음과 같은 속성을 갖는 어플리케이션에서 이점을 갖는다:  
+
+ - 그들은 비슷하고 주로 수명이 긴 집합으로 묶일 수 있는 객체를 생성한다. 예를 들어 반복적인 연산을 수행하는 Spark 워크플로우는 축적된 데이터나 셔플 데이터와 같은 수명이 긴 객체를 사용한다. 이 객체의 그룹은 TeraCache가 그것의 TeraCache 힙에서 광범위한 GC 없이 지역을 free할 수 있게 한다. 우리의 초기 TeraCache 프로토타입은 해당 객체들을 TeraCache 힙으로 옮기기 위해 runtime 시스템을 기반으로 한다. 즉, 사용자와 프로그램에게 투명한 Spark caching 코드에 주석을 다는것. 
+ - 그들은 전이적 폐쇄가 전체 힙을 포함하지 않는 객체를 생성한다. 보안성을 위해, 우리는 참조의 전이적 폐쇠(즉, 도달가능한 모든 개체)를 계산하고 TeraCache의 단일 영역으로 이동시켜서 TeraCache에서 H1으로의 포인터를 피했다. 이는 이러한 객체의 전이적 폐쇄가 전체 힙이 되어서는 안 된다는 것을 의미하고, 그렇지 않으면 TeraCache를 사용하면 오버헤드가 커진다.  
+
+예를 들어 TeraCache의 접근 방식은 새로운 포인터를 위해 수정된 후 전이적 폐쇄를 재스캔하는 등 개념적으로 가변 가능한 객체를 처리할 수 있지만, Spark에서 캐시된 객체는 불변이다.
+이는 TeraCache 힙을 캐시로 관리하는 것을 더 쉽게 한다.  
+
+최근, DRAM을 두가지 방향으로 확장하기 위한 상당한 양의 연구 활동이 있다: (1) NVMe(혹은 NVM) 장치에서 DRAM으로의 transparently caching 그리고 (2) 바이트 주소 지정이 가능한 NVM 혹은 블록 NVME 장치를 통해 시스템 물리주소를 확장(캐싱은 아닌).
+두 가지 경우 모두, 큰 힙을 채용하는것이 큰 GC 오버헤드를 발생시킨다.
+우리의 접근은 GC 오버헤드를 줄임으로써 수명이 짧고 비슷한 특성을 가진 객체들의 그룹을 관리하는데 상당한 성능적 이점을 보여준다. 
+따라서 우리는 TeraCache가 이 두 디자인의 대안으로 사용될 수 있으리라 생각한다.  
+
+## 5. Related Work
+
+
+## 6. Conclusions
+Spark 어플리케이션들은 종종, 특히 반복적인 연산을 진행할 때 중간 데이터를 cache한다.
+하지만, 반복되는 Spark의 RDD들의 직렬화/역직렬화는 현재는 GC 오버헤드의 증가 없이는 줄일 수 없는 상당한 CPU 오버헤드를 유발한다.
+우리는 이런 오버헤드가 고속 스토리지를 JVM 힙으로 확장함으로 해결될 수 있다고 생각한다.
+우리는 JVM과 Spark를 기반으로 하고 고속 스토리지에 memory mapped 된 on-heap RDD 캐시를 사용하는 TeraCache를 제안한다.
+TeraCache는 cached 된 RDD에 직접 접근을 제공하여,  cached된 객체에를 위한 GC 오버헤드와 serdes를 제거한다.
+우리의 실험 결과는 TeraCache를 사용할 때 serdes를 사용하는것에 비해 ML 워크로드 성능이 약 37% 향상됨을 보여준다.
+우리는 TeraCache가 아주 많은 변하지 않는 객체를 cache하는 다른 프레임워크들의 성능도 향상시킬 수 있을 것이라 기대한다.
