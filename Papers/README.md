@@ -1,6 +1,6 @@
 # 읽은 논문 목록
-01. [IO Stack Optimization for Smartphones](https://www.usenix.org/conference/atc13/technical-sessions/presentation/jeong)  
-02. [AI Benchmark: Running Deep Neural Networks on Android Smartphones](https://arxiv.org/abs/1810.01109)  
+- 01. [IO Stack Optimization for Smartphones](https://www.usenix.org/conference/atc13/technical-sessions/presentation/jeong)  
+- 02. [AI Benchmark: Running Deep Neural Networks on Android Smartphones](https://arxiv.org/abs/1810.01109)  
 03. [Continual Learning on the Edge with TensorFlow Lite](https://arxiv.org/abs/2105.01946)  
 04. [Analysis of Smartphone I/O Characteristics — Toward Efficient Swap in a Smartphone](https://ieeexplore.ieee.org/document/8815732)  
 05. [Device-Specific Linux Kernel Optimization for Android Smartphones](https://ieeexplore.ieee.org/document/8350440)  
