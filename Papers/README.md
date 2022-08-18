@@ -3,7 +3,7 @@
 02. _arxiv'18_ [AI Benchmark: Running Deep Neural Networks on Android Smartphones](https://arxiv.org/abs/1810.01109)  
 03. _arxiv'21_ [Continual Learning on the Edge with TensorFlow Lite](https://arxiv.org/abs/2105.01946)  
 04. _IEEE Access'19_ [Analysis of Smartphone I/O Characteristics — Toward Efficient Swap in a Smartphone](https://ieeexplore.ieee.org/document/8815732)  
-05. _International Conference on Mobile Cloud Computing, Services, and Engineering'18_ [Device-Specific Linux Kernel Optimization for Android Smartphones](https://ieeexplore.ieee.org/document/8350440)  
+05. _International Conference on Mobile Cloud Computing, Services, and Engineering'18_  [Device-Specific Linux Kernel Optimization for Android Smartphones](https://ieeexplore.ieee.org/document/8350440)  
 06. _HotStorage'20_ [Differentiating Cache Files for Fine-grain Management to Improve Mobile Performance and Lifetime](https://www.usenix.org/conference/hotstorage20/presentation/liang)  
 07. _HotStorage'20_ [Say Goodbye to Off-heap Caches! On-heap Caches Using Memory-Mapped I/O](https://www.usenix.org/conference/hotstorage20/presentation/kolokasis)  
 08. _EuroSys'16_ [BB: Booting Booster for Consumer Electronics with Modern OS](https://dl.acm.org/doi/10.1145/2901318.2901320)  
