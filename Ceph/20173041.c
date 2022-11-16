@@ -28,7 +28,7 @@ Symbol* add_symbol(Symbol* symbol_table, Line* head);
 void print_input(Line* head);
 void print_symbol(Symbol* symbolTable);
 void print_intermed_file(Line* head);
-
+void print_object(Line* head);
 
 int main() {
 	
@@ -63,6 +63,9 @@ int main() {
 
 	//intermed file 출력 
 	print_intermed_file(head);
+
+	//object 출력
+	print_object(head); 
 
 	return 0;
 }
@@ -224,6 +227,25 @@ void print_intermed_file(Line* head) {
 			printf("%s %s %s\n", tmp->first, tmp->second, tmp->third);
 		} else {
 			printf("%i %s %s %s\n", tmp->addr, tmp->first, tmp->second, tmp->third);
+		}
+		tmp = tmp->next;
+	}
+}
+
+void print_object(Line* head) {
+
+	printf("\n\nObject Program has been generated.\n\nObject Program:\n\n");
+
+	//H 출력 
+	Line* tmp = head;
+	printf("H^%s", tmp->first);
+	while (tmp != NULL) {
+		if ((strcmp(tmp->second, "START") == 0)) {
+			printf("^00%d", tmp->next->addr);		
+		}
+
+		if ((strcmp(tmp->second, "END") == 0)){
+			printf("^00%d\n", tmp->addr); 	
 		}
 		tmp = tmp->next;
 	}
