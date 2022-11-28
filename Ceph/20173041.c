@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
-
+//명령어를 저장할 구조체  
 typedef struct Line1 {
 	
 	struct Line1* next;
@@ -13,6 +14,7 @@ typedef struct Line1 {
 
 } Line;
 
+//Symbol Table을 구성할 구조체
 typedef struct Symbol1 {
 	
 	struct Symbol1* next;
@@ -20,7 +22,7 @@ typedef struct Symbol1 {
 	int addr;
 } Symbol;
 
-
+//함수 선언
 Line* add_line(Line* head, char* line);
 Line* file_read(char* file_name, Line* head);
 Line* calculate_addr(Line* head);
@@ -28,24 +30,35 @@ Symbol* add_symbol(Symbol* symbol_table, Line* head);
 void print_input(Line* head);
 void print_symbol(Symbol* symbolTable);
 void print_intermed_file(Line* head);
-void print_object(Line* head);
+void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char codel[][3]);
 
-int main() {
+int main(int argc, char* argv[]) {
 	
-	//링크드 리스트 시작 
+	//링크드 리스트의 head
 	Line* head = NULL;
 	Symbol* symbolTable = NULL;
 
-	//저장할 변수
+	//변수
 	char opcode[10], oprand[10], label[10], a[10], ad[10], symbol[10], ch;
 	char code [10][10], codel[4][3] = {"33", "44", "53", "57"};
 	char mnemonic[6][6] = {"START", "LDA", "STA", "LDCH", "STCH", "END"}; 
 	char mnemonicl[4][5] = {"LDA", "STA", "LDCH", "STCH"}; 
+	char file_name[50];
 
-	char file_name[20];
-
-	printf("파일 이름을 입력하세요: ");
-	scanf("%s", file_name);
+	//옵션 읽기 
+    int option;
+    while ((option = getopt(argc, argv, "i:")) != -1) {
+        switch(option) {
+            case 'i':
+                printf("입력 파일명: %s\n\n", optarg);
+				strcpy(file_name, optarg);
+                break;
+			case '?': 
+				printf("잘못된 옵션 %c\n", optopt);
+				return 0;
+				break;
+        }
+    }
 
 	//파일 읽기 
 	head = file_read(file_name, head);
@@ -64,8 +77,8 @@ int main() {
 	//intermed file 출력 
 	print_intermed_file(head);
 
-	//object 출력
-	print_object(head); 
+	//object 프로그램 출력
+	print_object(head, symbolTable, mnemonicl, codel);
 
 	return 0;
 }
@@ -76,7 +89,7 @@ Line* add_line(Line* head,char* line) {
 	//새로운 노드 생성 
 	Line* tmp = (Line*)malloc(sizeof(Line));
 
-	//문자열 잘라서 노드에 삽입 
+	//입력받은 문자열 공백 기준으로 잘라서 노드에 삽입 
 	char *words[3] = { NULL, }; 
 	char cp[60];
 	strcpy(cp, line);
@@ -109,12 +122,12 @@ Line* add_line(Line* head,char* line) {
 	}
 }
 
-//링크드 리스트 출력 테스트 함수 
+//입력 파일을 출력하는 함수
 void print_input(Line* head) {
  
-
 	printf("\n\nThe contents of Input File:\n\n");
 
+	//링크드 리스트 순회하며 출력
 	Line *tmp = head;
 	while(tmp != NULL) {
 		printf("%s %s %s\n", tmp->first, tmp->second, tmp->third);
@@ -139,7 +152,7 @@ Line* file_read(char* file_name, Line* head) {
 	while (fgets(line, sizeof(line), fp) != NULL) {
 		//개행 제거  
 		line[strlen(line)-1] = '\0'; 
-		//노드 추가
+		//읽은 라인으로 노드 추가
 		head = add_line(head, line);
 	}
 	fclose(fp);
@@ -152,14 +165,13 @@ Line* calculate_addr(Line* head) {
 	Line* tmp = head;	
 	int count = 0; 
 	int cur = atoi(head->third);
-	
+	//링크드 리스트 순회
 	while(tmp != NULL) {
-
-		if ((strcmp(tmp->first, "COPY")) == 0) {
+		if ((strcmp(tmp->second, "START")) == 0) { //start 명령어로부터 다음 라인의 주소 할당
 			tmp->next->addr = cur;
-		} else if ((strcmp(tmp->second, "END")) == 0) {
-			
-		} else if ((strcmp(tmp->second, "BYTE")) == 0 || (strcmp(tmp->second, "RESB")) == 0) {
+		} else if ((strcmp(tmp->second, "END")) == 0) {	//end 명령어
+		
+		} else if ((strcmp(tmp->second, "BYTE")) == 0 || (strcmp(tmp->second, "RESB")) == 0) {	//이외에 byte 혹은 word 크기만큼 주소 계산 
 			count += 1;
 			tmp->next->addr = cur+1;
 			cur += 1;
@@ -175,12 +187,13 @@ Line* calculate_addr(Line* head) {
 	return head;
 }
 
+//심볼 테이블 생성
 Symbol* add_symbol(Symbol* symbolTable, Line* head) {
 
 	Line* tmp = head;
-
+	//링크드 리스트 순회 
 	while (tmp != NULL) {
-		if ((strcmp(tmp->first, "**")) != 0 && (strcmp(tmp->first, "COPY")) != 0) {
+		if ((strcmp(tmp->first, "**")) != 0 && (strcmp(tmp->second, "START")) != 0) {
 			//심볼 추가 
 
 			Symbol* stmp = (Symbol*)malloc(sizeof(Symbol));
@@ -206,17 +219,19 @@ Symbol* add_symbol(Symbol* symbolTable, Line* head) {
 	return symbolTable;	
 }
 
+//심볼테이블 출력
 void print_symbol(Symbol* symbolTable) {
 
 	Symbol* tmp = symbolTable;
-	printf("\nThe contents of Symbol Table:\n\n");
+	printf("\nThe content2s of Symbol Table:\n\n");
 
 	while(tmp != NULL) {
-		printf("%s %i\n", tmp->symbol, tmp->addr);
+		printf("%s %d\n", tmp->symbol, tmp->addr);
 		tmp = tmp->next;
 	}
 }
 
+//intermed file 출력
 void print_intermed_file(Line* head) {
 
 	Line* tmp = head;
@@ -226,27 +241,117 @@ void print_intermed_file(Line* head) {
 		if ((strcmp(tmp->first, "COPY")) == 0) {
 			printf("%s %s %s\n", tmp->first, tmp->second, tmp->third);
 		} else {
-			printf("%i %s %s %s\n", tmp->addr, tmp->first, tmp->second, tmp->third);
+			printf("%d %s %s %s\n", tmp->addr, tmp->first, tmp->second, tmp->third);
 		}
 		tmp = tmp->next;
 	}
 }
 
-void print_object(Line* head) {
+//object 출력
+void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char codel[][3]) {
 
 	printf("\n\nObject Program has been generated.\n\nObject Program:\n\n");
-
-	//H 출력 
+//////////////H 출력
 	Line* tmp = head;
 	printf("H^%s", tmp->first);
 	while (tmp != NULL) {
+		//시작 주소 
 		if ((strcmp(tmp->second, "START") == 0)) {
-			printf("^00%d", tmp->next->addr);		
+			printf("^00%d", tmp->next->addr);
 		}
-
+		//종료 주소
 		if ((strcmp(tmp->second, "END") == 0)){
-			printf("^00%d\n", tmp->addr); 	
+			printf("^00%d\n", tmp->addr);
 		}
 		tmp = tmp->next;
 	}
+//////////////T 출력
+	tmp = head;
+		//시작 주소 
+	printf("T^00%d",tmp->next->addr);
+
+		//코드 길이
+	int start = tmp->next->addr;
+	while (tmp->next != NULL){
+		tmp = tmp->next;
+	} 
+	int end = tmp->addr;
+	printf("^%d", end-start-1);
+
+		//명령
+	tmp = head;
+
+	while(tmp != NULL) {
+		Symbol* stmp = symbolTable;
+
+		//LDA
+		if ((strcmp(tmp->second,mnemonicl[0])) == 0) {
+			printf("^%s", codel[0]);
+			
+			while(stmp != NULL) {
+				if((strcmp(stmp->symbol, tmp->third)) == 0) {
+					printf("%d", stmp->addr);
+					break;
+				}
+				stmp = stmp->next;
+			}			
+		}
+		//STA
+		if ((strcmp(tmp->second,mnemonicl[1])) == 0) {
+			printf("^%s", codel[1]);
+			while(stmp != NULL) {
+				if((strcmp(stmp->symbol, tmp->third)) == 0) {
+					printf("%d", stmp->addr);
+					break;
+				}
+				stmp = stmp->next;
+			}
+		}
+		//LDCH
+		if ((strcmp(tmp->second,mnemonicl[2])) == 0) {
+			printf("^%s", codel[2]);
+			while(stmp != NULL) {
+				if((strcmp(stmp->symbol, tmp->third)) == 0) {
+					printf("%d", stmp->addr);
+					break;
+				}
+				stmp = stmp->next;
+			}
+		}
+		//STCH
+		if ((strcmp(tmp->second,mnemonicl[3])) == 0) {
+			printf("^%s", codel[3]);
+			while(stmp != NULL) {
+				if((strcmp(stmp->symbol, tmp->third)) == 0) {
+					printf("%d", stmp->addr);
+					break;
+				}
+				stmp = stmp->next;
+			}
+		}
+		//WORD
+		if ((strcmp(tmp->second, "WORD")) == 0) {
+			printf("^%06d", atoi(tmp->third));
+		}
+		//BYTE
+		if ((strcmp(tmp->second, "BYTE")) == 0) {
+			char word[20];
+			strcpy(word, tmp->third);
+			char* ptr = strtok(word, "'");
+			ptr = strtok(NULL, "'");
+            printf("^");
+
+			if (word[0] == 67) {	//char
+				for (int i = 0; i < strlen(ptr); i ++) {
+					printf("%0x", ptr[i]);
+				}
+			} else {	//16진수 상수 
+				printf("%s", ptr);
+			}
+		}
+		tmp = tmp->next;
+	}
+//////////////E 출력 
+	tmp = head;
+	printf("\nE^00%d\n", tmp->next->addr); 
 }
