@@ -279,11 +279,11 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 	printf("T^00%d",tmp->next->addr);
 	//코드 길이
 	int start = tmp->next->addr;
-	while (tmp->next->next != NULL){
+	while (tmp->next != NULL){
 		tmp = tmp->next;
 	} 
 	int end = tmp->addr;
-	printf("^%d", end-start);
+	printf("^%d", end-start-1);
 
 	//명령
 	tmp = head;
@@ -297,8 +297,7 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 			while(stmp != NULL) {
 				if((strcmp(stmp->symbol, tmp->third)) == 0) {
 					printf("%d", stmp->addr);
-					remove_node(symbolTable, stmp);
-//					print_symbol(symbolTable);	
+					symbolTable = remove_node(symbolTable, stmp);
 					break;
 				}
 				stmp = stmp->next;
@@ -310,8 +309,7 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 			while(stmp != NULL) {
 				if((strcmp(stmp->symbol, tmp->third)) == 0) {
 					printf("%d", stmp->addr);
-					remove_node(symbolTable, stmp);
-//					print_symbol(symbolTable);
+					symbolTable = remove_node(symbolTable, stmp);
 					break;
 				}
 				stmp = stmp->next;
@@ -323,7 +321,7 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 			while(stmp != NULL) {
 				if((strcmp(stmp->symbol, tmp->third)) == 0) {
 					printf("%d", stmp->addr);
-					remove_node(symbolTable, stmp);
+					symbolTable = remove_node(symbolTable, stmp);
 					break;
 				}
 				stmp = stmp->next;
@@ -335,7 +333,7 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 			while(stmp != NULL) {
 				if((strcmp(stmp->symbol, tmp->third)) == 0) {
 					printf("%d", stmp->addr);
-					remove_node(symbolTable, stmp);
+					symbolTable = remove_node(symbolTable, stmp);
 					break;
 				}
 				stmp = stmp->next;
@@ -370,7 +368,8 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 //Symbol Table 제거 
 Symbol* remove_node(Symbol* symbolTable, Symbol* target) {
 	//목표가 head일때
-	if (target == symbolTable) { 
+	//
+	if (target->addr == symbolTable->addr && (strcmp(target->symbol, symbolTable->symbol)==0)) { 
 		symbolTable = symbolTable->next;
 		return symbolTable;
 	} 
