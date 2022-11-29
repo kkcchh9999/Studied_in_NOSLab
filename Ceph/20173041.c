@@ -31,6 +31,8 @@ void print_input(Line* head);
 void print_symbol(Symbol* symbolTable);
 void print_intermed_file(Line* head);
 void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char codel[][3]);
+Symbol* remove_node(Symbol* symbolTable, Symbol* target);
+
 
 int main(int argc, char* argv[]) {
 	
@@ -295,6 +297,8 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 			while(stmp != NULL) {
 				if((strcmp(stmp->symbol, tmp->third)) == 0) {
 					printf("%d", stmp->addr);
+					remove_node(symbolTable, stmp);
+//					print_symbol(symbolTable);	
 					break;
 				}
 				stmp = stmp->next;
@@ -306,6 +310,8 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 			while(stmp != NULL) {
 				if((strcmp(stmp->symbol, tmp->third)) == 0) {
 					printf("%d", stmp->addr);
+					remove_node(symbolTable, stmp);
+//					print_symbol(symbolTable);
 					break;
 				}
 				stmp = stmp->next;
@@ -317,6 +323,7 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 			while(stmp != NULL) {
 				if((strcmp(stmp->symbol, tmp->third)) == 0) {
 					printf("%d", stmp->addr);
+					remove_node(symbolTable, stmp);
 					break;
 				}
 				stmp = stmp->next;
@@ -328,6 +335,7 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 			while(stmp != NULL) {
 				if((strcmp(stmp->symbol, tmp->third)) == 0) {
 					printf("%d", stmp->addr);
+					remove_node(symbolTable, stmp);
 					break;
 				}
 				stmp = stmp->next;
@@ -351,11 +359,29 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 				}
 			} else {	//16진수 상수 
 				printf("%s", ptr);
-			}
+			}	
 		}
 		tmp = tmp->next;
 	}
 //////////////E 출력 
 	tmp = head;
 	printf("\nE^00%d\n", tmp->next->addr); 
+}
+//Symbol Table 제거 
+Symbol* remove_node(Symbol* symbolTable, Symbol* target) {
+	//목표가 head일때
+	if (target == symbolTable) { 
+		symbolTable = symbolTable->next;
+		return symbolTable;
+	} 
+  	//이외의 경우  
+	else {  
+		Symbol* tmp = symbolTable;
+		while(tmp->next != target) {
+			tmp = tmp->next;
+		}
+		tmp->next = target->next;
+		free(target);
+		return symbolTable;
+	}
 }
