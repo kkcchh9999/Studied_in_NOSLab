@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
     while ((option = getopt(argc, argv, "i:")) != -1) {
         switch(option) {
             case 'i':
-                printf("입력 파일명: %s\n\n", optarg);
+                printf("입력 파일명: %s\n", optarg);
 				strcpy(file_name, optarg);
                 break;
 			case '?': 
@@ -110,8 +110,7 @@ Line* add_line(Line* head,char* line) {
 	if(head == NULL) {
 		head = tmp;
 		return head;
-	} else {	//노드가 존재할 경우 
-			//마지막 노드 탐색 
+	} else {	//노드가 존재할 경우 마지막 노드 탐색 
 		Line* tail = head;
 		while (tail->next != NULL){
 			tail = tail->next;
@@ -171,10 +170,20 @@ Line* calculate_addr(Line* head) {
 			tmp->next->addr = cur;
 		} else if ((strcmp(tmp->second, "END")) == 0) {	//end 명령어
 		
-		} else if ((strcmp(tmp->second, "BYTE")) == 0 || (strcmp(tmp->second, "RESB")) == 0) {	//이외에 byte 혹은 word 크기만큼 주소 계산 
+		} else if ((strcmp(tmp->second, "BYTE")) == 0) {	//이외에 byte 혹은 word 크기만큼 주소 계산 
 			count += 1;
 			tmp->next->addr = cur+1;
 			cur += 1;
+		} else if ((strcmp(tmp->second, "RESW")) == 0) { 
+			int add = atoi(tmp->third) * 3;
+			count += add;
+			tmp->next->addr = cur + add;
+			cur += add;
+		} else if ((strcmp(tmp->second, "RESB")) == 0) {
+			int add = atoi(tmp->third);
+			count += add;
+			tmp->next->addr = cur + add;
+			cur += add;
 		} else {
 			count += 3;
 			tmp->next->addr = cur+3; 
@@ -195,7 +204,6 @@ Symbol* add_symbol(Symbol* symbolTable, Line* head) {
 	while (tmp != NULL) {
 		if ((strcmp(tmp->first, "**")) != 0 && (strcmp(tmp->second, "START")) != 0) {
 			//심볼 추가 
-
 			Symbol* stmp = (Symbol*)malloc(sizeof(Symbol));
 			stmp->next = NULL;
 			stmp->addr = tmp->addr;
@@ -211,11 +219,9 @@ Symbol* add_symbol(Symbol* symbolTable, Line* head) {
 				}
 				tail->next = stmp;
 			}
-		
 		}
 		tmp = tmp->next;
 	}	
-	
 	return symbolTable;	
 }
 
@@ -223,7 +229,7 @@ Symbol* add_symbol(Symbol* symbolTable, Line* head) {
 void print_symbol(Symbol* symbolTable) {
 
 	Symbol* tmp = symbolTable;
-	printf("\nThe content2s of Symbol Table:\n\n");
+	printf("\nThe contents of Symbol Table:\n\n");
 
 	while(tmp != NULL) {
 		printf("%s %d\n", tmp->symbol, tmp->addr);
@@ -267,20 +273,18 @@ void print_object(Line* head, Symbol* symbolTable, char mnemonicl[][5], char cod
 	}
 //////////////T 출력
 	tmp = head;
-		//시작 주소 
+	//시작 주소 
 	printf("T^00%d",tmp->next->addr);
-
-		//코드 길이
+	//코드 길이
 	int start = tmp->next->addr;
-	while (tmp->next != NULL){
+	while (tmp->next->next != NULL){
 		tmp = tmp->next;
 	} 
 	int end = tmp->addr;
-	printf("^%d", end-start-1);
+	printf("^%d", end-start);
 
-		//명령
+	//명령
 	tmp = head;
-
 	while(tmp != NULL) {
 		Symbol* stmp = symbolTable;
 
